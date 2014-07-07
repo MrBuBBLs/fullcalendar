@@ -229,6 +229,7 @@ function DayEventRenderer() {
 		var isRTL = opt('isRTL');
 		var event = segment.event;
 		var url = event.url;
+		var eventUrl = event.eventUrl;
 
 		// generate the list of CSS classNames
 		var classNames = [ 'fc-event', 'fc-event-hori' ];
@@ -274,10 +275,15 @@ function DayEventRenderer() {
 				htmlEscape(t.getEventTimeText(event)) +
 				"</span>";
 		}
+		if(eventUrl) {
+			html += "<a href='" + htmlEscape(eventUrl) + "'";
+		} else {
+			html += "<span";
+		}
 		html +=
-			"<span class='fc-event-title'>" +
+			" class='fc-event-title'>" +
 			htmlEscape(event.title || '') +
-			"</span>" +
+			"</" + (eventUrl ? "a" : "span") + ">" +
 			"</div>";
 		if (event.allDay && segment.isEnd && isEventResizable(event)) {
 			html +=

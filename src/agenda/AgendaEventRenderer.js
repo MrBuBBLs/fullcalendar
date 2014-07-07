@@ -315,6 +315,7 @@ function AgendaEventRenderer() {
 	function slotSegHtml(event, seg) {
 		var html = "<";
 		var url = event.url;
+		var eventUrl = event.eventUrl;
 		var skinCss = getSkinCss(event, opt);
 		var classes = ['fc-event', 'fc-event-vert'];
 		if (isEventDraggable(event)) {
@@ -350,8 +351,15 @@ function AgendaEventRenderer() {
 			"<div class='fc-event-time'>" +
 			htmlEscape(t.getEventTimeText(event)) +
 			"</div>" +
-			"<div class='fc-event-title'>" +
-			htmlEscape(event.title || '') +
+			"<div class='fc-event-title'>";
+		if(eventUrl) {
+			html += "<a href='" + eventUrl + "'>";
+		}
+		html += htmlEscape(event.title || '');
+		if(eventUrl) {
+			html += "</a>";
+		}
+		html +=
 			"</div>" +
 			"</div>" +
 			"<div class='fc-event-bg'></div>";
