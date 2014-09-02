@@ -36,7 +36,17 @@ $.extend(Grid.prototype, {
 
 		// build a large concatenation of event segment HTML
 		for (i = 0; i < segs.length; i++) {
-			html += this.renderSegHtml(segs[i], disableResizing);
+			var h = '';
+			if(segs[i].event && segs[i].event.evGroup && segs[i].event.events) {
+				// console.log(segs[i].event);// FIXME
+				h = this.renderGrpSegHtml(segs[i], disableResizing);
+				//h = this.renderSegHtml(segs[i], disableResizing);
+				console.log(h);
+			} else {
+				h = this.renderSegHtml(segs[i], disableResizing);
+			}
+
+			html += h;
 		}
 
 		// Grab individual elements from the combined HTML string. Use each as the default rendering.

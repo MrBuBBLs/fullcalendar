@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../dist/fullcalendar.css' rel='stylesheet' />
+<link href='../dist/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../lib/moment/moment.js'></script>
+<script src='../lib/jquery/dist/jquery.js'></script>
+<script src='../dist/fullcalendar.js'></script>
+<script>
+
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			defaultDate: '2014-09-12',
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			groupedEvents: true,
+			editable: false,
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2014-09-01'
+				},
+				{
+					title: 'Single event',
+					start: '2014-09-10T10:30:00',
+				},
+				{
+					evGroup: true,
+					title: 'Grouped events',
+					start: '2014-09-10T16:00:00',
+					events: [
+						{
+							title: 'Test one',
+							start: '2014-09-10T16:00:00',
+						},
+						{
+							title: 'Test two',
+							start: '2014-09-10T16:00:00',
+						}
+					]
+				},
+				{
+					title: 'test after group',
+					start: '2014-09-10T19:00:00',
+				},
+				{
+					title: 'Meeting',
+					start: '2014-09-12T10:30:00',
+					end: '2014-09-12T12:30:00'
+				},
+				{
+					title: 'Second meet',
+					start: '2014-09-12T12:00:00'
+				},
+				{
+					title: 'Third meet',
+					start: '2014-09-12T16:00:00'
+				}
+			]
+		});
+		
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+
+	<div id='calendar'></div>
+
+</body>
+</html>

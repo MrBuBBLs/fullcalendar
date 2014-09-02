@@ -119,6 +119,32 @@ $.extend(DayGrid.prototype, {
 			'</a>';
 	},
 
+	renderGrpSegHtml: function(seg, disableResizing) {
+		var hBase = this.renderSegHtml(seg, disableResizing);
+
+		var view = this.view;
+		var isRTL = view.opt('isRTL');
+		var event = seg.event;
+		var subEvents = event.events;
+		var isDraggable = view.isEventDraggable(event);
+		var isResizable = !disableResizing && event.allDay && seg.isEnd && view.isEventResizable(event);
+		var classes = this.getSegClasses(seg, isDraggable, isResizable);
+		var skinCss = this.getEventSkinCss(event);
+		var timeHtml = '';
+		var titleHtml;
+
+		classes.unshift('fc-day-grid-event');
+
+		var h = '';
+		for (i = 0; i < subEvents.length; i++) {
+			h += '<div>' + subEvents[i].title + '</div>';
+		}
+		var jqHtml = $(hBase);
+		$('div.fc-content', jqHtml).append(h).wrap('<a class="' + classes.join(' ') + '"></a>');
+
+		return jqHtml.html();
+	},
+
 
 	// Given a row # and an array of segments all in the same row, render a <tbody> element, a skeleton that contains
 	// the segments. Returns object with a bunch of internal data about how the render was calculated.
